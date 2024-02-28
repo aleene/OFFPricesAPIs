@@ -1,6 +1,6 @@
 //
-//  FSNMDictView.swift
-//  OFFFolksonomy
+//  DictView.swift
+//  OFFFPricesAPIs
 //
 //  Created by Arnaud Leene on 22/10/2022.
 //

@@ -7,14 +7,14 @@
 
 import SwiftUI
 
-class OFFPricesUsersViewModel: ObservableObject {
+class OFFPricesUsersBasicViewModel: ObservableObject {
     
     // variable that needs to be tracked by the view
     @Published var usersResponse: OFFPricesRequired.UsersResponse?
 
     fileprivate var errorMessage: String?
     fileprivate var page: UInt = 1
-    fileprivate var size: UInt = 1
+    fileprivate var size: UInt = 50
 
     private var offPricesSession = URLSession.shared
     
@@ -40,9 +40,9 @@ class OFFPricesUsersViewModel: ObservableObject {
     }
 }
 
-struct OFFPricesUsersView: View {
+struct OFFPricesUsersBasicView: View {
     
-    @StateObject var model = OFFPricesUsersViewModel()
+    @StateObject var model = OFFPricesUsersBasicViewModel()
 
     @State private var page: String = ""
     @State private var size: String = ""
@@ -69,16 +69,16 @@ struct OFFPricesUsersView: View {
         } else {
             Text("This fetch retrieves the users.")
                 .padding()
-            InputView(title: "Enter page number", placeholder: "1", text: $page)
+            InputView(title: "Enter page number", placeholder: "\(model.page)", text: $page)
                 .onChange( of: page)  {
                     if !page.isEmpty {
-                        model.page = UInt(page) ?? 0
+                        model.page = UInt(page) ?? model.page
                     }
                 }
-            InputView(title: "Enter page size", placeholder: "1", text: $size)
+            InputView(title: "Enter page size", placeholder: "\(model.size)", text: $size)
                 .onChange( of: size) {
                     if !size.isEmpty {
-                        model.size = UInt(size) ?? 0
+                        model.size = UInt(size) ?? model.size
                     }
                 }
 
@@ -100,5 +100,5 @@ struct OFFPricesUsersView: View {
 }
 
 #Preview {
-    OFFPricesUsersView()
+    OFFPricesUsersBasicView()
 }

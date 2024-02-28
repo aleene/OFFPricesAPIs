@@ -15,16 +15,14 @@ struct OFFPricesView: View {
              NavigationLink( destination: OFFPricesStatusView() ) {
                  Text("Status API's")
              }
-             NavigationLink( destination: nil
-                                //OFFPricesAuthView()
-             ) {
-                 Text("Authentication API's")
-             }
-             NavigationLink( destination: nil
-                            // OFFPricesUsersView()
-             ) {
+             NavigationLink( destination: OFFPricesUsersView() ) {
                  Text("Users API's")
              }
+             NavigationLink( destination: OFFPricesLocationsView() ) {
+                 Text("Locations API's")
+             }
+             /*
+
              NavigationLink( destination: nil
                             // OFFPricesPricesView()
                            ) {
@@ -45,8 +43,7 @@ struct OFFPricesView: View {
                            ) {
                  Text("Locations API's")
              }
-
-
+*/
          }
          .navigationTitle("OFF Prices API's")
      }

@@ -9,7 +9,13 @@ import SwiftUI
 
 struct OFFPricesLocationsView: View {
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        VStack {
+            NavigationLink( destination: OFFPricesLocationsSortedAndFilteredView() ) {
+                Text("Locations Sorted and Filtered API")
+            }
+
+        }
+        .navigationTitle("Locations Users API's")
     }
 }
 

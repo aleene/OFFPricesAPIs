@@ -9,7 +9,19 @@ import SwiftUI
 
 struct OFFPricesUsersView: View {
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        VStack {
+            NavigationLink( destination: OFFPricesUsersBasicView() ) {
+                Text("Users Basic API")
+            }
+            NavigationLink( destination: OFFPricesUsersSortedView() ) {
+                Text("Users Sorted API")
+            }
+            NavigationLink( destination: OFFPricesUsersSortedAndFilteredView() ) {
+                Text("Users Sorted and Filtered API")
+            }
+
+        }
+        .navigationTitle("OFF Users API's")
     }
 }
 

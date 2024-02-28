@@ -11,20 +11,37 @@ import Foundation
 
 struct OFFPricesRequired {
 
-/** all possible Robotoff API's
+/** all possible Price API's
  */
     enum APIs {
+        case locations
         case status
         case users
         
         var path: String {
             switch self {
+            case .locations: return "/locations"
             case .status: return "/status"
             case .users: return "/users"
             }
         }
     }
     
+    
+    // The allowed ordering fields. Any other rawValue will give a 422 error
+    public enum OrderBy: String {
+        case userId = "user_id"
+        case priceCount = "price_count"
+        case unordered
+    }
+    
+    // The default is increasing. Only valid if OrderBy is .userId or .priceCount
+    public enum OrderDirection: String {
+        case increasing = ""
+        case decreasing = "-"
+    }
+
+
 /**
     Some API's (ProductStats) can return a validation error with response code 401.
 */
@@ -48,9 +65,16 @@ struct OFFPricesRequired {
     }
     
     public struct ValidationErrorDetail: Codable {
+        var type: String?
         var loc: [String] = []
         var msg: String?
-        var type: String?
+        var input: [String] = []
+        var ctx: ValidationErrorDetailCtx? = nil
+        var url: String?
+    }
+    
+    public struct ValidationErrorDetailCtx: Codable {
+        var error: String? = nil
     }
 }
 
@@ -160,47 +184,7 @@ Init for all producttypes supported by OFF. This will setup the correct host and
     convenience init(api: OFFPricesRequired.APIs) {
         self.init(for: .food, for: api)
     }
-    convenience init(api: OFFPricesRequired.APIs,
-                     page: UInt,
-                     size: UInt,
-                     orderBy: OFFPricesRequired.OrderBy,
-                     orderDirection: OFFPricesRequired.OrderDirection,
-                     price_count: UInt?,
-                     price_count_gte: UInt?,
-                     price_count_lte: UInt?) {
-        guard api == .users
-            else { fatalError("OFFPricesRequest:init(api:page:size:price_count:price_count_gte:price_count:lte:): unallowed API specified") }
-        self.init(api: api)
-        queryItems.append(URLQueryItem(name: "page", value: "\(page)" ))
-        queryItems.append(URLQueryItem(name: "size", value: "\(size)" ))
-        /*
-         The following three items might contradict each other:
-         - price_count!=nil & price_count_gte < price_count : price_count is used
-         - price_count!=nil & price_count_gte > price_count : empty result
-         - price_count!=nil & price_count_lte < price_count : empty result
-         - price_count!=nil & price_count_lte > price_count : price_count is used
-         - price_count_gte > price_count_lte : empty result
-         */
-        if orderBy != .unordered {
-            queryItems.append(URLQueryItem(name: "order_by", value: orderDirection.rawValue + orderBy.rawValue ))
-        }
-
-        if let validPriceCount = price_count {
-            if price_count_gte != nil && price_count_lte != nil { fatalError("OFFPricesRequest:init(api:page:size:price_count:price_count_gte:price_count:lte:): price_count and ranges both specified; can contradict each other") }
-            queryItems.append(URLQueryItem(name: "price_count", value: "\(validPriceCount)" ))
-        }
-        if let validPriceCountGTE = price_count_gte {
-            if let validPriceCountLTE = price_count_lte,
-            validPriceCountLTE > validPriceCountGTE {
-                fatalError("OFFPricesRequest:init(api:page:size:price_count:price_count_gte:price_count:lte:): price_count_lte larger than price_count_gte")
-            }
-            queryItems.append(URLQueryItem(name: "price_count_gte", value: "\(validPriceCountGTE)" ))
-        }
-        if let validPriceCountLTE = price_count_lte {
-            queryItems.append(URLQueryItem(name: "price_count_lte", value: "\(validPriceCountLTE)" ))
-        }
-
-    }
+    
 }
 
 // The specific errors that can be produced by the server

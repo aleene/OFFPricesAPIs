@@ -8,12 +8,30 @@
 
 /* Begin PBXBuildFile section */
 		AB92D5CF2B8CDDAE00380D81 /* OFFPricesAPIApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB92D5CE2B8CDDAE00380D81 /* OFFPricesAPIApp.swift */; };
-		AB92D5D12B8CDDAE00380D81 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB92D5D02B8CDDAE00380D81 /* ContentView.swift */; };
+		AB92D5D12B8CDDAE00380D81 /* OFFPricesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB92D5D02B8CDDAE00380D81 /* OFFPricesView.swift */; };
 		AB92D5D32B8CDDB200380D81 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AB92D5D22B8CDDB200380D81 /* Assets.xcassets */; };
 		AB92D5D62B8CDDB200380D81 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AB92D5D52B8CDDB200380D81 /* Preview Assets.xcassets */; };
 		AB92D5E02B8CDDB200380D81 /* OFFPricesAPITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB92D5DF2B8CDDB200380D81 /* OFFPricesAPITests.swift */; };
-		AB92D5EA2B8CDDB200380D81 /* OFFPricesAPIUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB92D5E92B8CDDB200380D81 /* OFFPricesAPIUITests.swift */; };
-		AB92D5EC2B8CDDB200380D81 /* OFFPricesAPIUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB92D5EB2B8CDDB200380D81 /* OFFPricesAPIUITestsLaunchTests.swift */; };
+		AB92D5FC2B8CE05B00380D81 /* Decoding.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB92D5FB2B8CE05B00380D81 /* Decoding.swift */; };
+		AB92D5FE2B8CE07600380D81 /* OFFAddtionsExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB92D5FD2B8CE07600380D81 /* OFFAddtionsExtension.swift */; };
+		AB92D6002B8CE07D00380D81 /* OFFAdditions.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB92D5FF2B8CE07D00380D81 /* OFFAdditions.swift */; };
+		AB92D6022B8CE08700380D81 /* HTTPLibrary.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB92D6012B8CE08700380D81 /* HTTPLibrary.swift */; };
+		AB92D6042B8CE09000380D81 /* OFFPricesRequired.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB92D6032B8CE09000380D81 /* OFFPricesRequired.swift */; };
+		AB92D6072B8CE3C800380D81 /* OFFPricesStatusView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB92D6062B8CE3C800380D81 /* OFFPricesStatusView.swift */; };
+		AB92D60A2B8CE41200380D81 /* OFFPricesStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB92D6092B8CE41200380D81 /* OFFPricesStatus.swift */; };
+		ABBBC0092B8DD1BD002B46F2 /* OFFPricesUsersBasicView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABBBC0082B8DD1BD002B46F2 /* OFFPricesUsersBasicView.swift */; };
+		ABBBC00B2B8DD1DF002B46F2 /* OFFPricesUsers.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABBBC00A2B8DD1DF002B46F2 /* OFFPricesUsers.swift */; };
+		ABBBC00E2B8DDE0C002B46F2 /* InputView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABBBC00D2B8DDE0C002B46F2 /* InputView.swift */; };
+		ABBBC0102B8DDF7A002B46F2 /* ListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABBBC00F2B8DDF7A002B46F2 /* ListView.swift */; };
+		ABBBC0132B8DE25D002B46F2 /* OFFPricesExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABBBC0122B8DE25D002B46F2 /* OFFPricesExtension.swift */; };
+		ABBBC0152B8DEB65002B46F2 /* DictView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABBBC0142B8DEB65002B46F2 /* DictView.swift */; };
+		ABBBC0172B8DEB7A002B46F2 /* DictElementView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABBBC0162B8DEB7A002B46F2 /* DictElementView.swift */; };
+		ABBBC0192B8E0C2A002B46F2 /* OFFPricesUsersView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABBBC0182B8E0C2A002B46F2 /* OFFPricesUsersView.swift */; };
+		ABBBC01B2B8E0CD7002B46F2 /* OFFPricesUsersSortedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABBBC01A2B8E0CD7002B46F2 /* OFFPricesUsersSortedView.swift */; };
+		ABBBC01D2B8E11A7002B46F2 /* OFFPricesUsersSortedAndFilteredView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABBBC01C2B8E11A7002B46F2 /* OFFPricesUsersSortedAndFilteredView.swift */; };
+		ABF33AE32B8F29A000E1CFA2 /* OFFPricesLocations.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABF33AE22B8F29A000E1CFA2 /* OFFPricesLocations.swift */; };
+		ABF33AE62B8F36CA00E1CFA2 /* OFFPricesLocationsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABF33AE52B8F36CA00E1CFA2 /* OFFPricesLocationsView.swift */; };
+		ABF33AE82B8F37A100E1CFA2 /* OFFPricesLocationsSortedAndFilteredView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABF33AE72B8F37A100E1CFA2 /* OFFPricesLocationsSortedAndFilteredView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -36,14 +54,32 @@
 /* Begin PBXFileReference section */
 		AB92D5CB2B8CDDAE00380D81 /* OFFPricesAPI.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = OFFPricesAPI.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		AB92D5CE2B8CDDAE00380D81 /* OFFPricesAPIApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OFFPricesAPIApp.swift; sourceTree = "<group>"; };
-		AB92D5D02B8CDDAE00380D81 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		AB92D5D02B8CDDAE00380D81 /* OFFPricesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OFFPricesView.swift; sourceTree = "<group>"; };
 		AB92D5D22B8CDDB200380D81 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		AB92D5D52B8CDDB200380D81 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		AB92D5DB2B8CDDB200380D81 /* OFFPricesAPITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = OFFPricesAPITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		AB92D5DF2B8CDDB200380D81 /* OFFPricesAPITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OFFPricesAPITests.swift; sourceTree = "<group>"; };
 		AB92D5E52B8CDDB200380D81 /* OFFPricesAPIUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = OFFPricesAPIUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		AB92D5E92B8CDDB200380D81 /* OFFPricesAPIUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OFFPricesAPIUITests.swift; sourceTree = "<group>"; };
-		AB92D5EB2B8CDDB200380D81 /* OFFPricesAPIUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OFFPricesAPIUITestsLaunchTests.swift; sourceTree = "<group>"; };
+		AB92D5FB2B8CE05B00380D81 /* Decoding.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Decoding.swift; sourceTree = "<group>"; };
+		AB92D5FD2B8CE07600380D81 /* OFFAddtionsExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OFFAddtionsExtension.swift; sourceTree = "<group>"; };
+		AB92D5FF2B8CE07D00380D81 /* OFFAdditions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OFFAdditions.swift; sourceTree = "<group>"; };
+		AB92D6012B8CE08700380D81 /* HTTPLibrary.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HTTPLibrary.swift; sourceTree = "<group>"; };
+		AB92D6032B8CE09000380D81 /* OFFPricesRequired.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OFFPricesRequired.swift; sourceTree = "<group>"; };
+		AB92D6062B8CE3C800380D81 /* OFFPricesStatusView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OFFPricesStatusView.swift; sourceTree = "<group>"; };
+		AB92D6092B8CE41200380D81 /* OFFPricesStatus.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OFFPricesStatus.swift; sourceTree = "<group>"; };
+		ABBBC0082B8DD1BD002B46F2 /* OFFPricesUsersBasicView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OFFPricesUsersBasicView.swift; sourceTree = "<group>"; };
+		ABBBC00A2B8DD1DF002B46F2 /* OFFPricesUsers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OFFPricesUsers.swift; sourceTree = "<group>"; };
+		ABBBC00D2B8DDE0C002B46F2 /* InputView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InputView.swift; sourceTree = "<group>"; };
+		ABBBC00F2B8DDF7A002B46F2 /* ListView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ListView.swift; sourceTree = "<group>"; };
+		ABBBC0122B8DE25D002B46F2 /* OFFPricesExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OFFPricesExtension.swift; sourceTree = "<group>"; };
+		ABBBC0142B8DEB65002B46F2 /* DictView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DictView.swift; sourceTree = "<group>"; };
+		ABBBC0162B8DEB7A002B46F2 /* DictElementView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DictElementView.swift; sourceTree = "<group>"; };
+		ABBBC0182B8E0C2A002B46F2 /* OFFPricesUsersView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OFFPricesUsersView.swift; sourceTree = "<group>"; };
+		ABBBC01A2B8E0CD7002B46F2 /* OFFPricesUsersSortedView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OFFPricesUsersSortedView.swift; sourceTree = "<group>"; };
+		ABBBC01C2B8E11A7002B46F2 /* OFFPricesUsersSortedAndFilteredView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OFFPricesUsersSortedAndFilteredView.swift; sourceTree = "<group>"; };
+		ABF33AE22B8F29A000E1CFA2 /* OFFPricesLocations.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OFFPricesLocations.swift; sourceTree = "<group>"; };
+		ABF33AE52B8F36CA00E1CFA2 /* OFFPricesLocationsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OFFPricesLocationsView.swift; sourceTree = "<group>"; };
+		ABF33AE72B8F37A100E1CFA2 /* OFFPricesLocationsSortedAndFilteredView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OFFPricesLocationsSortedAndFilteredView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -76,7 +112,6 @@
 			children = (
 				AB92D5CD2B8CDDAE00380D81 /* OFFPricesAPI */,
 				AB92D5DE2B8CDDB200380D81 /* OFFPricesAPITests */,
-				AB92D5E82B8CDDB200380D81 /* OFFPricesAPIUITests */,
 				AB92D5CC2B8CDDAE00380D81 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -95,7 +130,8 @@
 			isa = PBXGroup;
 			children = (
 				AB92D5CE2B8CDDAE00380D81 /* OFFPricesAPIApp.swift */,
-				AB92D5D02B8CDDAE00380D81 /* ContentView.swift */,
+				AB92D5F82B8CE01300380D81 /* Demo */,
+				AB92D5F92B8CE02D00380D81 /* Optional */,
 				AB92D5D22B8CDDB200380D81 /* Assets.xcassets */,
 				AB92D5D42B8CDDB200380D81 /* Preview Content */,
 			);
@@ -118,13 +154,111 @@
 			path = OFFPricesAPITests;
 			sourceTree = "<group>";
 		};
-		AB92D5E82B8CDDB200380D81 /* OFFPricesAPIUITests */ = {
+		AB92D5F82B8CE01300380D81 /* Demo */ = {
 			isa = PBXGroup;
 			children = (
-				AB92D5E92B8CDDB200380D81 /* OFFPricesAPIUITests.swift */,
-				AB92D5EB2B8CDDB200380D81 /* OFFPricesAPIUITestsLaunchTests.swift */,
+				ABBBC0112B8DE25D002B46F2 /* Extensions */,
+				AB92D5D02B8CDDAE00380D81 /* OFFPricesView.swift */,
+				ABBBC00C2B8DDDF7002B46F2 /* Generic */,
+				ABF33AE42B8F36A100E1CFA2 /* Locations */,
+				ABBBC0072B8DD18D002B46F2 /* Users */,
+				AB92D6052B8CE34700380D81 /* Status */,
 			);
-			path = OFFPricesAPIUITests;
+			path = Demo;
+			sourceTree = "<group>";
+		};
+		AB92D5F92B8CE02D00380D81 /* Optional */ = {
+			isa = PBXGroup;
+			children = (
+				ABF33AE12B8F297900E1CFA2 /* Locations */,
+				ABBBC01E2B8E12B9002B46F2 /* Users */,
+				AB92D6082B8CE40700380D81 /* Status */,
+				AB92D5FA2B8CE04500380D81 /* Required */,
+			);
+			path = Optional;
+			sourceTree = "<group>";
+		};
+		AB92D5FA2B8CE04500380D81 /* Required */ = {
+			isa = PBXGroup;
+			children = (
+				AB92D6032B8CE09000380D81 /* OFFPricesRequired.swift */,
+				AB92D5FB2B8CE05B00380D81 /* Decoding.swift */,
+				AB92D6012B8CE08700380D81 /* HTTPLibrary.swift */,
+				AB92D5FF2B8CE07D00380D81 /* OFFAdditions.swift */,
+				AB92D5FD2B8CE07600380D81 /* OFFAddtionsExtension.swift */,
+			);
+			path = Required;
+			sourceTree = "<group>";
+		};
+		AB92D6052B8CE34700380D81 /* Status */ = {
+			isa = PBXGroup;
+			children = (
+				AB92D6062B8CE3C800380D81 /* OFFPricesStatusView.swift */,
+			);
+			path = Status;
+			sourceTree = "<group>";
+		};
+		AB92D6082B8CE40700380D81 /* Status */ = {
+			isa = PBXGroup;
+			children = (
+				AB92D6092B8CE41200380D81 /* OFFPricesStatus.swift */,
+			);
+			path = Status;
+			sourceTree = "<group>";
+		};
+		ABBBC0072B8DD18D002B46F2 /* Users */ = {
+			isa = PBXGroup;
+			children = (
+				ABBBC0182B8E0C2A002B46F2 /* OFFPricesUsersView.swift */,
+				ABBBC0082B8DD1BD002B46F2 /* OFFPricesUsersBasicView.swift */,
+				ABBBC01A2B8E0CD7002B46F2 /* OFFPricesUsersSortedView.swift */,
+				ABBBC01C2B8E11A7002B46F2 /* OFFPricesUsersSortedAndFilteredView.swift */,
+			);
+			path = Users;
+			sourceTree = "<group>";
+		};
+		ABBBC00C2B8DDDF7002B46F2 /* Generic */ = {
+			isa = PBXGroup;
+			children = (
+				ABBBC0162B8DEB7A002B46F2 /* DictElementView.swift */,
+				ABBBC0142B8DEB65002B46F2 /* DictView.swift */,
+				ABBBC00D2B8DDE0C002B46F2 /* InputView.swift */,
+				ABBBC00F2B8DDF7A002B46F2 /* ListView.swift */,
+			);
+			path = Generic;
+			sourceTree = "<group>";
+		};
+		ABBBC0112B8DE25D002B46F2 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				ABBBC0122B8DE25D002B46F2 /* OFFPricesExtension.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
+		ABBBC01E2B8E12B9002B46F2 /* Users */ = {
+			isa = PBXGroup;
+			children = (
+				ABBBC00A2B8DD1DF002B46F2 /* OFFPricesUsers.swift */,
+			);
+			path = Users;
+			sourceTree = "<group>";
+		};
+		ABF33AE12B8F297900E1CFA2 /* Locations */ = {
+			isa = PBXGroup;
+			children = (
+				ABF33AE22B8F29A000E1CFA2 /* OFFPricesLocations.swift */,
+			);
+			path = Locations;
+			sourceTree = "<group>";
+		};
+		ABF33AE42B8F36A100E1CFA2 /* Locations */ = {
+			isa = PBXGroup;
+			children = (
+				ABF33AE52B8F36CA00E1CFA2 /* OFFPricesLocationsView.swift */,
+				ABF33AE72B8F37A100E1CFA2 /* OFFPricesLocationsSortedAndFilteredView.swift */,
+			);
+			path = Locations;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -257,8 +391,28 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				AB92D5D12B8CDDAE00380D81 /* ContentView.swift in Sources */,
+				AB92D5D12B8CDDAE00380D81 /* OFFPricesView.swift in Sources */,
+				ABBBC0102B8DDF7A002B46F2 /* ListView.swift in Sources */,
+				AB92D6022B8CE08700380D81 /* HTTPLibrary.swift in Sources */,
+				ABBBC0132B8DE25D002B46F2 /* OFFPricesExtension.swift in Sources */,
+				AB92D5FC2B8CE05B00380D81 /* Decoding.swift in Sources */,
+				ABBBC0092B8DD1BD002B46F2 /* OFFPricesUsersBasicView.swift in Sources */,
+				AB92D6002B8CE07D00380D81 /* OFFAdditions.swift in Sources */,
+				AB92D60A2B8CE41200380D81 /* OFFPricesStatus.swift in Sources */,
+				ABF33AE32B8F29A000E1CFA2 /* OFFPricesLocations.swift in Sources */,
+				ABBBC0152B8DEB65002B46F2 /* DictView.swift in Sources */,
+				ABBBC0192B8E0C2A002B46F2 /* OFFPricesUsersView.swift in Sources */,
+				ABBBC0172B8DEB7A002B46F2 /* DictElementView.swift in Sources */,
+				AB92D6072B8CE3C800380D81 /* OFFPricesStatusView.swift in Sources */,
+				ABBBC01D2B8E11A7002B46F2 /* OFFPricesUsersSortedAndFilteredView.swift in Sources */,
+				ABBBC01B2B8E0CD7002B46F2 /* OFFPricesUsersSortedView.swift in Sources */,
+				ABBBC00B2B8DD1DF002B46F2 /* OFFPricesUsers.swift in Sources */,
+				ABF33AE62B8F36CA00E1CFA2 /* OFFPricesLocationsView.swift in Sources */,
+				ABF33AE82B8F37A100E1CFA2 /* OFFPricesLocationsSortedAndFilteredView.swift in Sources */,
 				AB92D5CF2B8CDDAE00380D81 /* OFFPricesAPIApp.swift in Sources */,
+				ABBBC00E2B8DDE0C002B46F2 /* InputView.swift in Sources */,
+				AB92D5FE2B8CE07600380D81 /* OFFAddtionsExtension.swift in Sources */,
+				AB92D6042B8CE09000380D81 /* OFFPricesRequired.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -274,8 +428,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				AB92D5EA2B8CDDB200380D81 /* OFFPricesAPIUITests.swift in Sources */,
-				AB92D5EC2B8CDDB200380D81 /* OFFPricesAPIUITestsLaunchTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

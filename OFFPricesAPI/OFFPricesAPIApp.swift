@@ -11,7 +11,9 @@ import SwiftUI
 struct OFFPricesAPIApp: App {
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            NavigationView() {
+                OFFPricesView()
+            }
         }
     }
 }
