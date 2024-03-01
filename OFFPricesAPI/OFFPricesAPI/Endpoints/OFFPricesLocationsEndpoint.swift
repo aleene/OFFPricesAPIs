@@ -1,5 +1,5 @@
 //
-//  OFFPricesLocations.swift
+//  OFFPricesLocationsEndpoint.swift
 //  OFFPricesAPI
 //
 //  Created by Arnaud Leene on 28/02/2024.
@@ -13,7 +13,7 @@ class OFFPricesLocationsRequest: OFFPricesRequest {
                      size: UInt,
                      osmName: String?,
                      osmAddressCountry: String?,
-                     orderBy: OFFPricesRequired.OrderBy,
+                     orderBy: OFFPricesRequired.LocationsOrderBy,
                      orderDirection: OFFPricesRequired.OrderDirection,
                      price_count: UInt?,
                      price_count_gte: UInt?,
@@ -59,6 +59,22 @@ class OFFPricesLocationsRequest: OFFPricesRequest {
         }
 
     }
+    
+    convenience init(osmType: OFFPricesRequired.OSMtype,
+                     osmID: UInt) {
+        self.init(api: .locationsOsm)
+        self.path += "/"
+        self.path += osmType.rawValue
+        self.path += "/"
+        self.path += "\(osmID)"
+    }
+    
+    convenience init(id: UInt) {
+        self.init(api: .locations)
+        self.path += "/"
+        self.path += "\(id)"
+    }
+
 }
 
 extension OFFPricesRequired {
@@ -92,6 +108,29 @@ The datastructure retrieved for a 200-reponse  for the Locations endpoint.
         var updated: String?
     }
     
+// The allowed ordering fields. Any other rawValue will give a 422 error
+    public enum LocationsOrderBy: String {
+        case id = "id"
+        case osmId = "osm_id"
+        case osmType = "osm_type"
+        case osmName = "osm_name"
+        case osmDisplayName = "osm_display_name"
+        case osmAddressPostcode = "osm_address_postcode"
+        case osmAddressCity = "osm_address_city"
+        case osmAddressCountry = "osm_address_country"
+        case osmLat = "osm_lat"
+        case osmLon = "osm_lon"
+        case priceCount = "price_count"
+        case created = "created"
+        case updated = "updated"
+        case unordered
+    }
+
+    public enum OSMtype: String {
+        case node = "node"
+        case way = "way"
+        case relation = "relation"
+    }
 }
 
 extension URLSession {
@@ -118,7 +157,7 @@ A completion block with a Result enum (success or failure). The associated value
                             priceCount: UInt? = nil,
                             priceCountGte: UInt? = nil,
                             priceCountLte: UInt? = nil,
-                            orderBy: OFFPricesRequired.OrderBy,
+                            orderBy: OFFPricesRequired.LocationsOrderBy,
                             orderDirection: OFFPricesRequired.OrderDirection,
                             completion: @escaping (_ result: Result<OFFPricesRequired.LocationsResponse, OFFPricesError>) -> Void) {
         let request = OFFPricesLocationsRequest.init(page: page,
@@ -135,4 +174,44 @@ A completion block with a Result enum (success or failure). The associated value
             return
         }
     }
+    
+    /**
+    Function to retrieve the users and the number of price entries for the users. In addition the output can be ordered by field name and direction.. And the user can limit the output by price count or price count range.
+
+    - Parameters:
+     - tyoe: OSM type (.way, .node, .relation)
+     - id: the size of the results page (50)
+         
+     - returns:
+    A completion block with a Result enum (success or failure). The associated value for success is a OFFPricesRequired.UsersResponse struct.
+    */
+        func OFFPricesLocations(type: OFFPricesRequired.OSMtype,
+                                id: UInt,
+                                completion: @escaping (_ result: Result<OFFPricesRequired.Location, OFFPricesError>) -> Void) {
+            let request = OFFPricesLocationsRequest(osmType: type,
+                                                    osmID: id)
+                fetch(request: request, responses: [200:OFFPricesRequired.Location.self]) { (result) in
+                completion(result)
+                return
+            }
+        }
+
+    
+    /**
+    Function to retrieve a single location based on the prices shop id.
+
+    - Parameters:
+     - id: the OFF id of the location
+         
+     - returns:
+    A completion block with a Result enum (success or failure). The associated value for success is a OFFPricesRequired.UsersResponse struct.
+    */
+        func OFFPricesLocations(id: UInt,
+                                completion: @escaping (_ result: Result<OFFPricesRequired.Location, OFFPricesError>) -> Void) {
+            let request = OFFPricesLocationsRequest(id: id)
+                fetch(request: request, responses: [200:OFFPricesRequired.Location.self]) { (result) in
+                completion(result)
+                return
+            }
+        }
 }

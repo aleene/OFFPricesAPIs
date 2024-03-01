@@ -11,7 +11,7 @@ class OFFPricesUsersRequest: OFFPricesRequest {
     
     convenience init(page: UInt,
                      size: UInt,
-                     orderBy: OFFPricesRequired.OrderBy,
+                     orderBy: OFFPricesRequired.UsersOrderBy,
                      orderDirection: OFFPricesRequired.OrderDirection,
                      price_count: UInt?,
                      price_count_gte: UInt?,
@@ -72,7 +72,14 @@ The datastructure retrieved for a 200-reponse 200 for the Status endpoint.
         var user_id: String?
         var price_count: Int?
     }
+    // The allowed ordering fields. Any other rawValue will give a 422 error
+    public enum UsersOrderBy: String {
+        case userId = "user_id"
+        case priceCount = "price_count"
+        case unordered
+    }
     
+
 }
 
 extension URLSession {
@@ -94,7 +101,7 @@ A completion block with a Result enum (success or failure). The associated value
 */
         func OFFPricesUsers(page: UInt,
                             size: UInt,
-                            orderBy: OFFPricesRequired.OrderBy = .unordered,
+                            orderBy: OFFPricesRequired.UsersOrderBy = .unordered,
                             orderDirection: OFFPricesRequired.OrderDirection = .increasing,
                             price_count: UInt? = nil,
                             price_count_gte: UInt? = nil,

@@ -15,27 +15,23 @@ struct OFFPricesRequired {
  */
     enum APIs {
         case locations
+        case locationsOsm
+        case products
         case status
         case users
         
         var path: String {
             switch self {
             case .locations: return "/locations"
+            case .locationsOsm: return "/locations/osm"
+            case .products: return "/products"
             case .status: return "/status"
             case .users: return "/users"
             }
         }
     }
     
-    
-    // The allowed ordering fields. Any other rawValue will give a 422 error
-    public enum OrderBy: String {
-        case userId = "user_id"
-        case priceCount = "price_count"
-        case unordered
-    }
-    
-    // The default is increasing. Only valid if OrderBy is .userId or .priceCount
+        // The default is increasing. Only valid if OrderBy is .userId or .priceCount
     public enum OrderDirection: String {
         case increasing = ""
         case decreasing = "-"

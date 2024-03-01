@@ -1,5 +1,5 @@
 //
-//  OFFPricesStatus.swift
+//  OFFPricesStatusEndpoint.swift
 //  OFFPricesAPIs
 //
 //  Created by Arnaud Leene on 26/02/2024
