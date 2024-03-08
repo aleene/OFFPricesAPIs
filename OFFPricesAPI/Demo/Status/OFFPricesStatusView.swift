@@ -11,8 +11,7 @@ class OFFPricesStatusViewModel: ObservableObject {
     
     // variable that needs to be tracked by the view
     @Published var statusResponse: OFFPricesRequired.StatusResponse?
-
-    fileprivate var errorMessage: String?
+    @Published var errorMessage: String?
 
     private var offPricesSession = URLSession.shared
     

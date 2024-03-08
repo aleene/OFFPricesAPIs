@@ -18,8 +18,6 @@ class OFFPricesLocationsRequest: OFFPricesRequest {
                      price_count: UInt?,
                      price_count_gte: UInt?,
                      price_count_lte: UInt?) {
-        //guard api == .locations
-        //    else { fatalError("OFFPricesLocationsRequest:init(api:page:size:osmName:osmAddressCountry:price_count:price_count_gte:price_count:lte:): unallowed API specified") }
         self.init(api: .locations)
         
         queryItems.append(URLQueryItem(name: "page", value: "\(page)" ))
@@ -69,10 +67,10 @@ class OFFPricesLocationsRequest: OFFPricesRequest {
         self.path += "\(osmID)"
     }
     
-    convenience init(id: UInt) {
+    convenience init(locationId: UInt) {
         self.init(api: .locations)
         self.path += "/"
-        self.path += "\(id)"
+        self.path += "\(locationId)"
     }
 
 }
@@ -92,21 +90,6 @@ The datastructure retrieved for a 200-reponse  for the Locations endpoint.
         var pages: Int?
     }
     
-    public struct Location: Codable {
-        var osm_id: Int?
-        var osm_type: String?
-        var id: Int?
-        var osm_name: String?
-        var osm_display_name: String?
-        var osm_address_postcode: String?
-        var osm_address_city: String?
-        var osm_address_country: String?
-        var osm_lat: Double?
-        var osm_lon: Double?
-        var price_count: UInt?
-        var created: String?
-        var updated: String?
-    }
     
 // The allowed ordering fields. Any other rawValue will give a 422 error
     public enum LocationsOrderBy: String {
@@ -208,7 +191,7 @@ A completion block with a Result enum (success or failure). The associated value
     */
         func OFFPricesLocations(id: UInt,
                                 completion: @escaping (_ result: Result<OFFPricesRequired.Location, OFFPricesError>) -> Void) {
-            let request = OFFPricesLocationsRequest(id: id)
+            let request = OFFPricesLocationsRequest(locationId: id)
                 fetch(request: request, responses: [200:OFFPricesRequired.Location.self]) { (result) in
                 completion(result)
                 return

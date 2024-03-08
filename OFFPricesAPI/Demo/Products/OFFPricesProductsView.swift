@@ -9,7 +9,18 @@ import SwiftUI
 
 struct OFFPricesProductsView: View {
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        VStack {
+            NavigationLink( destination: OFFPricesProductsIDView() ) {
+                Text("Product ID")
+            }
+            NavigationLink( destination: OFFPricesProductsBarcodeView() ) {
+                Text("Product barcode")
+            }
+            NavigationLink( destination: OFFPricesProductsListView() ) {
+                Text("Products list")
+            }
+        }
+        .navigationTitle("Products API's")
     }
 }
 

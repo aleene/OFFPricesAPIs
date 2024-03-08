@@ -12,38 +12,21 @@ struct OFFPricesView: View {
      
      var body: some View {
          VStack {
+             NavigationLink( destination: OFFPricesLocationsView() ) {
+                 Text("Locations Endpoint API's")
+             }
+             NavigationLink( destination: OFFPricesPricesView() ) {
+                 Text("Prices Endpoint API's")
+             }
+             NavigationLink( destination: OFFPricesProductsView() ) {
+                 Text("Products Endpoint API's")
+             }
              NavigationLink( destination: OFFPricesStatusView() ) {
-                 Text("Status API's")
+                 Text("Status Endpoint API's")
              }
              NavigationLink( destination: OFFPricesUsersView() ) {
-                 Text("Users API's")
+                 Text("Users Endpoint API's")
              }
-             NavigationLink( destination: OFFPricesLocationsView() ) {
-                 Text("Locations API's")
-             }
-             /*
-
-             NavigationLink( destination: nil
-                            // OFFPricesPricesView()
-                           ) {
-                 Text("Prices API's")
-             }
-             NavigationLink( destination: nil
-                            // OFFPricesProofsView()
-                           ) {
-                 Text("Proofs API's")
-             }
-             NavigationLink( destination: nil
-                             // OFFPricesProductsView() 
-                           ) {
-                 Text("Products API's")
-             }
-             NavigationLink( destination: nil
-                             // OFFPricesLocationsView()
-                           ) {
-                 Text("Locations API's")
-             }
-*/
          }
          .navigationTitle("OFF Prices API's")
      }

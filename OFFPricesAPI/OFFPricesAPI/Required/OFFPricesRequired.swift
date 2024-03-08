@@ -5,7 +5,7 @@
 //  Created by Arnaud Leene on 26/02/2024
 //
 
-// This file contains the code that is required by multiple API's
+// This file contains the code that is required by multiple API's. Checkout the comments if you want to delete parts.
 
 import Foundation
 
@@ -16,7 +16,9 @@ struct OFFPricesRequired {
     enum APIs {
         case locations
         case locationsOsm
+        case prices
         case products
+        case productsCode
         case status
         case users
         
@@ -24,14 +26,16 @@ struct OFFPricesRequired {
             switch self {
             case .locations: return "/locations"
             case .locationsOsm: return "/locations/osm"
+            case .prices: return "/prices"
             case .products: return "/products"
+            case .productsCode: return "/products/code"
             case .status: return "/status"
             case .users: return "/users"
             }
         }
     }
     
-        // The default is increasing. Only valid if OrderBy is .userId or .priceCount
+    // The default is increasing.
     public enum OrderDirection: String {
         case increasing = ""
         case decreasing = "-"
@@ -44,7 +48,11 @@ struct OFFPricesRequired {
     public struct Error401: Codable {
         var detail: String?
     }
-    
+
+    public struct Error404: Codable {
+        var detail: String?
+    }
+
     public struct Detail: Codable {
         var detail: String?
     }
@@ -128,6 +136,29 @@ extension URLSession {
                             return
                         }
                     }
+                } else if response.response.statusCode == 404 {
+                    if let data = response.body {
+                        Decoding.decode(data: data, type: OFFPricesRequired.Error404.self) { result in
+                            switch result {
+                            case .success(let gelukt):
+                                completion(.failure(.notFound(gelukt.detail ?? "no detail received")))
+                            case .failure(let decodingError):
+                                switch decodingError {
+                                case .dataCorrupted(let context):
+                                    completion(.failure(.dataCorrupted(context)))
+                                case .keyNotFound(let key, let context):
+                                    completion(.failure(.keyNotFound(key, context)))
+                                case .typeMismatch(let type, let context):
+                                    completion(.failure(.typeMismatch(type, context)))
+                                case .valueNotFound(let type, let context):
+                                    completion(.failure(.valueNotFound(type, context)))
+                                @unknown default:
+                                    completion(.failure(.unsupportedSuccessResponseType))
+                                }
+                            }
+                            return
+                        }
+                    }
                 } else {
                     if let data = response.body {
                         print("failure: ", response.status.rawValue)
@@ -194,6 +225,7 @@ public enum OFFPricesError: Error {
     case methodNotAllowed
     case missingParameter(String)
     case noBody
+    case notFound(String)
     case typeMismatch(Any.Type, DecodingError.Context)
     case unsupportedSuccessResponseType
     case valueNotFound(Any.Type, DecodingError.Context)
@@ -226,6 +258,8 @@ public enum OFFPricesError: Error {
             return "OFFPricesError: \(parameter)"
         case .noBody:
             return ""
+        case .notFound(let parameter):
+            return "OFFPricesError: \(parameter)"
         case .unsupportedSuccessResponseType:
             return ""
         case .dataCorrupted(let context):

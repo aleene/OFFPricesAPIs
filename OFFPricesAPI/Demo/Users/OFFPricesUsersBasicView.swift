@@ -11,8 +11,8 @@ class OFFPricesUsersBasicViewModel: ObservableObject {
     
     // variable that needs to be tracked by the view
     @Published var usersResponse: OFFPricesRequired.UsersResponse?
-
-    fileprivate var errorMessage: String?
+    @Published var errorMessage: String?
+    
     fileprivate var page: UInt = 1
     fileprivate var size: UInt = 50
 
@@ -53,11 +53,17 @@ struct OFFPricesUsersBasicView: View {
         if isFetching {
             VStack {
                 if let response = model.usersResponse {
-                    let validPage = response.page != nil ? "\(response.page!)" : "invalid"
-                    let validTotalPages = response.page != nil ? "\(response.pages!)" : "invalid"
-                    let text = "Users for page \(validPage)  of \(validTotalPages)"
-                    ListView(text: text, dictArray: model.usersDictArray)
+                    if response.items != nil,
+                       response.items!.count == 0 {
+                        Text("No users found")
 
+                    } else {
+                        
+                        let validPage = response.page != nil ? "\(response.page!)" : "invalid"
+                        let validTotalPages = response.pages != nil ? "\(response.pages!)" : "invalid"
+                        let text = "Users for page \(validPage)  of \(validTotalPages)"
+                        ListView(text: text, dictArray: model.usersDictArray)
+                    }
                 } else if model.errorMessage != nil {
                     Text(model.errorMessage!)
                 } else {

@@ -13,6 +13,12 @@ struct OFFPricesLocationsView: View {
             NavigationLink( destination: OFFPricesLocationsSortedAndFilteredView() ) {
                 Text("Locations Sorted and Filtered API")
             }
+            NavigationLink( destination: OFFPricesLocationsOSMView() ) {
+                Text("OSM node location")
+            }
+            NavigationLink( destination: OFFPricesLocationsNodeView() ) {
+                Text("OFF Prices node location")
+            }
 
         }
         .navigationTitle("Locations Users API's")

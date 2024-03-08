@@ -11,14 +11,13 @@ class OFFPricesLocationsSortedAndFilteredViewModel: ObservableObject {
     
     // variable that needs to be tracked by the view
     @Published var response: OFFPricesRequired.LocationsResponse?
-
-    fileprivate var errorMessage: String?
+    @Published var errorMessage: String?
     
     fileprivate var page: UInt = 1
     fileprivate var size: UInt = 50
     fileprivate var osmName: String? = nil
     fileprivate var osmAddressCountry: String? = nil
-    fileprivate var orderBy: OFFPricesRequired.OrderBy = .unordered
+    fileprivate var orderBy: OFFPricesRequired.LocationsOrderBy = .unordered
     fileprivate var orderDirection: OFFPricesRequired.OrderDirection = .increasing
     fileprivate var priceCount: UInt? = nil
     fileprivate var priceCountLowerLimit: UInt? = nil
@@ -35,14 +34,14 @@ class OFFPricesLocationsSortedAndFilteredViewModel: ObservableObject {
     fileprivate func update() {
         // get the remote data
         offPricesSession.OFFPricesLocations(page: page,
-                                        size: size,
-                                        osmName: osmName,
-                                        osmAddressCountry: osmAddressCountry,
-                                        priceCount: priceCount,
-                                        priceCountGte: priceCountLowerLimit,
-                                        priceCountLte: priceCountUpperLimit,
-                                        orderBy: orderBy,
-                                        orderDirection: orderDirection ) { (result) in
+                                            size: size,
+                                            osmName: osmName,
+                                            osmAddressCountry: osmAddressCountry,
+                                            priceCount: priceCount,
+                                            priceCountGte: priceCountLowerLimit,
+                                            priceCountLte: priceCountUpperLimit,
+                                            orderBy: orderBy,
+                                            orderDirection: orderDirection ) { (result) in
             DispatchQueue.main.async {
                 switch result {
                 case .success(let response):
@@ -79,8 +78,8 @@ struct OFFPricesLocationsSortedAndFilteredView: View {
                         Text("No locations found")
 
                     } else {
-                        let validPage = response.page != nil ? "\(response.page!)" : "invalid"
-                        let validTotalPages = response.page != nil ? "\(response.pages!)" : "invalid"
+                        let validPage = response.page != nil ? "\(response.page!)" : "invalid page"
+                        let validTotalPages = response.pages != nil ? "\(response.pages!)" : "invalid pages"
                         let text = "Locations for page \(validPage)  of \(validTotalPages)"
                         ListView(text: text, dictArray: model.usersDictArray)
                     }
@@ -130,10 +129,10 @@ struct OFFPricesLocationsSortedAndFilteredView: View {
                     }
                 }
             
-            InputView(title: "Enter order field (none, user, count)", placeholder: "none", text: $order)
+            InputView(title: "Enter order field (none, osm_id, id, count, ...)", placeholder: "none", text: $order)
                 .onChange(of: order) {
                     if order == "user" {
-                        model.orderBy = .userId
+                        model.orderBy = .id
                     } else if order == "count" {
                         model.orderBy = .priceCount
                     } else {

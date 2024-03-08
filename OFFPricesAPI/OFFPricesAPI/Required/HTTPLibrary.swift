@@ -255,8 +255,8 @@ It is possible that not all possible responses have been correctly intercepted.
                         // The response was not valid, but a json was received
                         completion(.success(response))
                     } else if httpResponse.statusCode == 404 {
-                        let error = HTTPError(code: .invalidRequest, request: request, response: nil, underlyingError: nil)
-                        completion(.failure(error))
+                        // The response was not valid, but a json was received
+                        completion(.success(response))
                     } else {
                         print("statusCode not intercepted: ", httpResponse.statusCode)
                         let error = HTTPError(code: .invalidRequest, request: request, response: nil, underlyingError: nil)
