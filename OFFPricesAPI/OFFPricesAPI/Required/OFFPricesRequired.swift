@@ -14,21 +14,25 @@ struct OFFPricesRequired {
 /** all possible Price API's
  */
     enum APIs {
+        case auth
         case locations
         case locationsOsm
         case prices
         case products
         case productsCode
+        case session
         case status
         case users
         
         var path: String {
             switch self {
+            case .auth: return "/auth"
             case .locations: return "/locations"
             case .locationsOsm: return "/locations/osm"
             case .prices: return "/prices"
             case .products: return "/products"
             case .productsCode: return "/products/code"
+            case .session: return "/session"
             case .status: return "/status"
             case .users: return "/users"
             }
@@ -136,12 +140,12 @@ extension URLSession {
                             return
                         }
                     }
-                } else if response.response.statusCode == 404 {
+                } else if response.response.statusCode == 401{
                     if let data = response.body {
-                        Decoding.decode(data: data, type: OFFPricesRequired.Error404.self) { result in
+                        Decoding.decode(data: data, type: OFFPricesRequired.Error401.self) { result in
                             switch result {
                             case .success(let gelukt):
-                                completion(.failure(.notFound(gelukt.detail ?? "no detail received")))
+                                completion(.failure(.notAuthenticated(gelukt.detail ?? "401:no authenticated message received")))
                             case .failure(let decodingError):
                                 switch decodingError {
                                 case .dataCorrupted(let context):
@@ -159,6 +163,54 @@ extension URLSession {
                             return
                         }
                     }
+
+                } else if response.response.statusCode == 404 {
+                    if let data = response.body {
+                        Decoding.decode(data: data, type: OFFPricesRequired.Error404.self) { result in
+                            switch result {
+                            case .success(let gelukt):
+                                completion(.failure(.notFound(gelukt.detail ?? "404:no detail received")))
+                            case .failure(let decodingError):
+                                switch decodingError {
+                                case .dataCorrupted(let context):
+                                    completion(.failure(.dataCorrupted(context)))
+                                case .keyNotFound(let key, let context):
+                                    completion(.failure(.keyNotFound(key, context)))
+                                case .typeMismatch(let type, let context):
+                                    completion(.failure(.typeMismatch(type, context)))
+                                case .valueNotFound(let type, let context):
+                                    completion(.failure(.valueNotFound(type, context)))
+                                @unknown default:
+                                    completion(.failure(.unsupportedSuccessResponseType))
+                                }
+                            }
+                            return
+                        }
+                    }
+                } else if response.response.statusCode == 422 {
+                    if let data = response.body {
+                        Decoding.decode(data: data, type: OFFPricesRequired.ValidationError.self) { result in
+                            switch result {
+                            case .success(let gelukt):
+                                completion(.failure(.validationError(gelukt.detail.description)))
+                            case .failure(let decodingError):
+                                switch decodingError {
+                                case .dataCorrupted(let context):
+                                    completion(.failure(.dataCorrupted(context)))
+                                case .keyNotFound(let key, let context):
+                                    completion(.failure(.keyNotFound(key, context)))
+                                case .typeMismatch(let type, let context):
+                                    completion(.failure(.typeMismatch(type, context)))
+                                case .valueNotFound(let type, let context):
+                                    completion(.failure(.valueNotFound(type, context)))
+                                @unknown default:
+                                    completion(.failure(.unsupportedSuccessResponseType))
+                                }
+                            }
+                            return
+                        }
+                    }
+
                 } else {
                     if let data = response.body {
                         print("failure: ", response.status.rawValue)
@@ -225,9 +277,11 @@ public enum OFFPricesError: Error {
     case methodNotAllowed
     case missingParameter(String)
     case noBody
+    case notAuthenticated(String)
     case notFound(String)
     case typeMismatch(Any.Type, DecodingError.Context)
     case unsupportedSuccessResponseType
+    case validationError(String)
     case valueNotFound(Any.Type, DecodingError.Context)
 
     
@@ -260,6 +314,8 @@ public enum OFFPricesError: Error {
             return ""
         case .notFound(let parameter):
             return "OFFPricesError: \(parameter)"
+        case .notAuthenticated(let parameter):
+            return "OFFPricesError: \(parameter)"
         case .unsupportedSuccessResponseType:
             return ""
         case .dataCorrupted(let context):
@@ -268,6 +324,8 @@ public enum OFFPricesError: Error {
             return "OFFPricesError:Key '\(key)' not found: \(context.debugDescription) codingPath:  \(context.codingPath)"
         case .typeMismatch(let value, let context):
             return "OFFPricesError:Value '\(value)' not found \(context.debugDescription) codingPath: \(context.codingPath)"
+        case .validationError(let value):
+            return "OFFPricesError:ValidationError \(value)"
         case .valueNotFound(let type, let context):
             return "OFFPricesError:Type '\(type)' mismatch: \(context.debugDescription) codingPath:  \(context.codingPath)"
         }

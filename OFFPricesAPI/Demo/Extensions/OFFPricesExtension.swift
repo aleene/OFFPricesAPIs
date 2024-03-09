@@ -111,6 +111,32 @@ extension OFFPricesRequired.Proof {
         temp["created"] = created ?? "nil"
         return temp
     }
+}
+
+extension OFFPricesRequired.PricePatchResponse {
+    var dict: [String:String] {
+        var temp: [String:String] = [:]
+        temp["product_code"] = product_code ?? "price_per"
+        temp["product_name"] = product_name ?? "price_per"
+        temp["category_tag"] = category_tag != nil && !category_tag!.isEmpty ? category_tag!.first : "empty"
+        temp["labels_tags"] = labels_tags != nil && !labels_tags!.isEmpty ? labels_tags!.first : "empty"
+        temp["origins_tags"] = origins_tags != nil && !origins_tags!.isEmpty ? origins_tags!.first : "empty"
+        temp["price"] = price != nil ? "\(price!)" : "nil"
+        temp["price_is_discounted"] = price_is_discounted != nil ? (price_is_discounted! ? "true" : "false") : "nil"
+        temp["price_without_discount"] = price_without_discount != nil ? "\(price_without_discount!)" : "nil"
+        temp["price_per"] = currency ?? "price_per"
+        temp["currency"] = currency ?? "nil"
+        temp["location_osm_id"] = location_osm_id != nil ? "\(location_osm_id!)" : "nil"
+        temp["location_osm_type"] = location_osm_type ?? "nil"
+        temp["date"] = date ?? "nil"
+        temp["proof_id"] = proof_id != nil ? "\(proof_id!)" : "nil"
+        temp["id"] = id != nil ? "\(id!)" : "nil"
+        temp["product_id"] = product_id != nil ? "\(product_id!)" : "nil"
+        temp["location_id"] = location_id != nil ? "\(location_id!)" : "nil"
+        temp["owner"] = owner ?? "nil"
+        temp["created"] = created ?? "nil"
+        return temp
+    }
 
 }
 

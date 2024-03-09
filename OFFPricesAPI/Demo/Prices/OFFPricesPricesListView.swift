@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-class OFFPricesPricesListViewModel: ObservableObject {
+class OFFPricesPricesPricesListViewModel: ObservableObject {
     
     // variable that needs to be tracked by the view
     @Published var response: OFFPricesRequired.PricesResponse?
@@ -30,7 +30,7 @@ class OFFPricesPricesListViewModel: ObservableObject {
     fileprivate var price__gte: Double? = nil
     fileprivate var price__lt: Double? = nil
     fileprivate var price__lte: Double? = nil
-    fileprivate var currency: String? = nil
+    fileprivate var currency: ISO4217 = .Euro
     fileprivate var date: String? = nil
     fileprivate var date__gt : String? = nil
     fileprivate var date__gte: String? = nil
@@ -90,8 +90,8 @@ class OFFPricesPricesListViewModel: ObservableObject {
     }
 }
 
-struct OFFPricesListView: View {
-    @StateObject var model = OFFPricesPricesListViewModel()
+struct OFFPricesPricesListView: View {
+    @StateObject var model = OFFPricesPricesPricesListViewModel()
 
     @State private var page: String = ""
     @State private var size: String = ""
@@ -248,5 +248,5 @@ struct OFFPricesListView: View {
 }
 
 #Preview {
-    OFFPricesListView()
+    OFFPricesPricesListView()
 }

@@ -9,13 +9,17 @@ import SwiftUI
 
 struct OFFPricesView: View {
     
-     
+    @ObservedObject var authController: AuthController
+
      var body: some View {
          VStack {
+             NavigationLink(destination: OFFPricesAuthView(authController: authController) ) {
+                 Text("Auth Endpoint API")
+             }
              NavigationLink( destination: OFFPricesLocationsView() ) {
                  Text("Locations Endpoint API's")
              }
-             NavigationLink( destination: OFFPricesPricesView() ) {
+             NavigationLink( destination: OFFPricesPricesView(authController: authController) ) {
                  Text("Prices Endpoint API's")
              }
              NavigationLink( destination: OFFPricesProductsView() ) {
@@ -27,6 +31,7 @@ struct OFFPricesView: View {
              NavigationLink( destination: OFFPricesUsersView() ) {
                  Text("Users Endpoint API's")
              }
+
          }
          .navigationTitle("OFF Prices API's")
      }
@@ -35,6 +40,6 @@ struct OFFPricesView: View {
  // Give an overview of all Prices API's
  struct OFFPricesView_Previews: PreviewProvider {
      static var previews: some View {
-         OFFPricesView()
+         OFFPricesView(authController: AuthController())
      }
  }

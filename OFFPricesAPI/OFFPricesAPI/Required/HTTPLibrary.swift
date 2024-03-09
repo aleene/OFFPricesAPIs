@@ -12,6 +12,7 @@ import Foundation
 public enum HTTPMethod: String {
     case delete = "DELETE"
     case get = "GET"
+    case patch = "PATCH"
     case post = "POST"
     case put = "PUT"
 }
@@ -254,7 +255,13 @@ It is possible that not all possible responses have been correctly intercepted.
                     } else if httpResponse.statusCode == 400 {
                         // The response was not valid, but a json was received
                         completion(.success(response))
+                    } else if httpResponse.statusCode == 401 {
+                        // The response was not valid, but a json was received
+                        completion(.success(response))
                     } else if httpResponse.statusCode == 404 {
+                        // The response was not valid, but a json was received
+                        completion(.success(response))
+                    } else if httpResponse.statusCode == 422 {
                         // The response was not valid, but a json was received
                         completion(.success(response))
                     } else {

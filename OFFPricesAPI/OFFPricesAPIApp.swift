@@ -9,10 +9,14 @@ import SwiftUI
 
 @main
 struct OFFPricesAPIApp: App {
+    
+/// Every API call should get the tokens here
+    @StateObject private var authController = AuthController()
+
     var body: some Scene {
         WindowGroup {
             NavigationView() {
-                OFFPricesView()
+                OFFPricesView(authController: authController)
             }
         }
     }
