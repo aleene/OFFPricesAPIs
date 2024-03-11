@@ -57,6 +57,10 @@ struct OFFPricesRequired {
         var detail: String?
     }
 
+    public struct Error405: Codable {
+        var detail: String?
+    }
+
     public struct Detail: Codable {
         var detail: String?
     }
@@ -95,12 +99,20 @@ extension URLSession {
             switch result {
             case .success(let response):
                 print("success :", response.response.statusCode)
+                let fields = response.headers as? [String:String]
+                let cookie: String? = fields?["Set-Cookie"] ?? nil
                 if let responsetype = responses[response.status.rawValue],
                    let data = response.body {
                     Decoding.decode(data: data, type: responsetype) { result in
                         switch result {
                         case .success(let gelukt):
-                            completion(.success(gelukt))
+                            // If this is an authorisation request, I should add the cookie
+                            if var auth = gelukt as? OFFPricesRequired.Auth {
+                                auth.cookie = cookie
+                                completion(.success(auth as! T))
+                            } else {
+                                completion(.success(gelukt))
+                            }
                         case .failure(let decodingError):
                             switch decodingError {
                             case .dataCorrupted(let context):
@@ -187,6 +199,30 @@ extension URLSession {
                             return
                         }
                     }
+                } else if response.response.statusCode == 405 {
+                    if let data = response.body {
+                        Decoding.decode(data: data, type: OFFPricesRequired.Error405.self) { result in
+                            switch result {
+                            case .success(let gelukt):
+                                completion(.failure(.notFound(gelukt.detail ?? "405:no detail received")))
+                            case .failure(let decodingError):
+                                switch decodingError {
+                                case .dataCorrupted(let context):
+                                    completion(.failure(.dataCorrupted(context)))
+                                case .keyNotFound(let key, let context):
+                                    completion(.failure(.keyNotFound(key, context)))
+                                case .typeMismatch(let type, let context):
+                                    completion(.failure(.typeMismatch(type, context)))
+                                case .valueNotFound(let type, let context):
+                                    completion(.failure(.valueNotFound(type, context)))
+                                @unknown default:
+                                    completion(.failure(.unsupportedSuccessResponseType))
+                                }
+                            }
+                            return
+                        }
+                    }
+
                 } else if response.response.statusCode == 422 {
                     if let data = response.body {
                         Decoding.decode(data: data, type: OFFPricesRequired.ValidationError.self) { result in

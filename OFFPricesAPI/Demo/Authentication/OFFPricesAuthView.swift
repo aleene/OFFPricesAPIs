@@ -16,9 +16,13 @@ struct OFFPricesAuthView: View {
             NavigationLink( destination: OFFPricesAuthenticationView(authController: authController) ) {
                 Text("Auth Endpoint API ")
             }
-            NavigationLink( destination: OFFPricesSession() ) {
-                Text("Session Endpoint API (session cookies not supported)")
+            NavigationLink( destination: OFFPricesSessionView() ) {
+                Text("Session Endpoint API (authenticate first)")
             }
+            NavigationLink( destination: OFFPricesDeleteSessionView() ) {
+                Text("Delete Session Endpoint API (authenticate first)")
+            }
+
         }
         .navigationTitle("Authentication Endpoint API's")
     }

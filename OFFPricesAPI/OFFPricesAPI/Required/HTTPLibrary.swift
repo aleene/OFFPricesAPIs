@@ -68,7 +68,9 @@ public struct HTTPResponse {
 
 public enum HTTPStatus: Int {
     case success = 200
+    case whatisdis = 403
     case notFound = 404
+    case ivalidRequest = 405
     case validationError = 422
     case internalServerError = 500
     case notImplemented = 501
@@ -258,7 +260,14 @@ It is possible that not all possible responses have been correctly intercepted.
                     } else if httpResponse.statusCode == 401 {
                         // The response was not valid, but a json was received
                         completion(.success(response))
+                    } else if httpResponse.statusCode == 403 {
+                        // The response was not valid, but a json was received
+                        // perform input operation requires a valid sessionID
+                        completion(.success(response))
                     } else if httpResponse.statusCode == 404 {
+                        // The response was not valid, but a json was received
+                        completion(.success(response))
+                    } else if httpResponse.statusCode == 405 {
                         // The response was not valid, but a json was received
                         completion(.success(response))
                     } else if httpResponse.statusCode == 422 {

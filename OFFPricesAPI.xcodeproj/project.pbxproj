@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		AB0D880F2B9F303900B4C62F /* OFFPricesDeleteSessionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB0D880E2B9F303900B4C62F /* OFFPricesDeleteSessionView.swift */; };
 		AB1B0C282B920C5500D9195C /* OFFPricesPricesEndpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB1B0C272B920C5500D9195C /* OFFPricesPricesEndpoint.swift */; };
 		AB1B0C2A2B922BA400D9195C /* OFFPricesRequiredProof.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB1B0C292B922BA400D9195C /* OFFPricesRequiredProof.swift */; };
 		AB1B0C2C2B922BF500D9195C /* OFFPricesRequiredLocation.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB1B0C2B2B922BF500D9195C /* OFFPricesRequiredLocation.swift */; };
@@ -20,6 +21,8 @@
 		AB321E442B9B38EF0076ED67 /* OFFPricesAuthView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB321E432B9B38EF0076ED67 /* OFFPricesAuthView.swift */; };
 		AB321E472B9B3A640076ED67 /* OFFPricesSessionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB321E462B9B3A640076ED67 /* OFFPricesSessionView.swift */; };
 		AB321E492B9B51050076ED67 /* OFFPricesPatchPriceView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB321E482B9B51050076ED67 /* OFFPricesPatchPriceView.swift */; };
+		AB321E4B2B9C9A480076ED67 /* OFFPricesPostPriceView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB321E4A2B9C9A480076ED67 /* OFFPricesPostPriceView.swift */; };
+		AB321E4D2B9CBACE0076ED67 /* OFFPricesDeletePriceView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB321E4C2B9CBACE0076ED67 /* OFFPricesDeletePriceView.swift */; };
 		AB92D5CF2B8CDDAE00380D81 /* OFFPricesAPIApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB92D5CE2B8CDDAE00380D81 /* OFFPricesAPIApp.swift */; };
 		AB92D5D12B8CDDAE00380D81 /* OFFPricesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB92D5D02B8CDDAE00380D81 /* OFFPricesView.swift */; };
 		AB92D5D32B8CDDB200380D81 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AB92D5D22B8CDDB200380D81 /* Assets.xcassets */; };
@@ -72,6 +75,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		AB0D880E2B9F303900B4C62F /* OFFPricesDeleteSessionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OFFPricesDeleteSessionView.swift; sourceTree = "<group>"; };
 		AB1B0C272B920C5500D9195C /* OFFPricesPricesEndpoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OFFPricesPricesEndpoint.swift; sourceTree = "<group>"; };
 		AB1B0C292B922BA400D9195C /* OFFPricesRequiredProof.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OFFPricesRequiredProof.swift; sourceTree = "<group>"; };
 		AB1B0C2B2B922BF500D9195C /* OFFPricesRequiredLocation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OFFPricesRequiredLocation.swift; sourceTree = "<group>"; };
@@ -85,6 +89,8 @@
 		AB321E432B9B38EF0076ED67 /* OFFPricesAuthView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OFFPricesAuthView.swift; sourceTree = "<group>"; };
 		AB321E462B9B3A640076ED67 /* OFFPricesSessionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OFFPricesSessionView.swift; sourceTree = "<group>"; };
 		AB321E482B9B51050076ED67 /* OFFPricesPatchPriceView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OFFPricesPatchPriceView.swift; sourceTree = "<group>"; };
+		AB321E4A2B9C9A480076ED67 /* OFFPricesPostPriceView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OFFPricesPostPriceView.swift; sourceTree = "<group>"; };
+		AB321E4C2B9CBACE0076ED67 /* OFFPricesDeletePriceView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OFFPricesDeletePriceView.swift; sourceTree = "<group>"; };
 		AB92D5CB2B8CDDAE00380D81 /* OFFPricesAPI.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = OFFPricesAPI.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		AB92D5CE2B8CDDAE00380D81 /* OFFPricesAPIApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OFFPricesAPIApp.swift; sourceTree = "<group>"; };
 		AB92D5D02B8CDDAE00380D81 /* OFFPricesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OFFPricesView.swift; sourceTree = "<group>"; };
@@ -153,6 +159,7 @@
 				AB321E3F2B9B287B0076ED67 /* OFFPricesAuthenticationView.swift */,
 				AB321E462B9B3A640076ED67 /* OFFPricesSessionView.swift */,
 				AB321E432B9B38EF0076ED67 /* OFFPricesAuthView.swift */,
+				AB0D880E2B9F303900B4C62F /* OFFPricesDeleteSessionView.swift */,
 			);
 			path = Authentication;
 			sourceTree = "<group>";
@@ -312,8 +319,10 @@
 			isa = PBXGroup;
 			children = (
 				AB1B0C2F2B92384200D9195C /* OFFPricesPricesView.swift */,
+				AB321E4C2B9CBACE0076ED67 /* OFFPricesDeletePriceView.swift */,
 				AB1B0C312B9238A700D9195C /* OFFPricesPricesListView.swift */,
 				AB321E482B9B51050076ED67 /* OFFPricesPatchPriceView.swift */,
+				AB321E4A2B9C9A480076ED67 /* OFFPricesPostPriceView.swift */,
 			);
 			path = Prices;
 			sourceTree = "<group>";
@@ -465,6 +474,7 @@
 				ABBBC0102B8DDF7A002B46F2 /* ListView.swift in Sources */,
 				AB92D6022B8CE08700380D81 /* HTTPLibrary.swift in Sources */,
 				ABBBC0132B8DE25D002B46F2 /* OFFPricesExtension.swift in Sources */,
+				AB0D880F2B9F303900B4C62F /* OFFPricesDeleteSessionView.swift in Sources */,
 				AB1B0C282B920C5500D9195C /* OFFPricesPricesEndpoint.swift in Sources */,
 				AB321E422B9B362B0076ED67 /* OFFPricesSessionEndpoint.swift in Sources */,
 				AB92D5FC2B8CE05B00380D81 /* Decoding.swift in Sources */,
@@ -478,11 +488,13 @@
 				AB321E3D2B9B25860076ED67 /* OFFPricesAuthEndpoint.swift in Sources */,
 				AB321E442B9B38EF0076ED67 /* OFFPricesAuthView.swift in Sources */,
 				ABDACCA72B91E30300BE9373 /* OFFPricesProductsEndpoint.swift in Sources */,
+				AB321E4D2B9CBACE0076ED67 /* OFFPricesDeletePriceView.swift in Sources */,
 				AB321E402B9B287B0076ED67 /* OFFPricesAuthenticationView.swift in Sources */,
 				ABBBC0152B8DEB65002B46F2 /* DictView.swift in Sources */,
 				ABDACCA12B91D05400BE9373 /* OFFPricesLocationsNodeView.swift in Sources */,
 				ABBBC0192B8E0C2A002B46F2 /* OFFPricesUsersView.swift in Sources */,
 				AB1B0C322B9238A700D9195C /* OFFPricesPricesListView.swift in Sources */,
+				AB321E4B2B9C9A480076ED67 /* OFFPricesPostPriceView.swift in Sources */,
 				ABBBC0172B8DEB7A002B46F2 /* DictElementView.swift in Sources */,
 				AB92D6072B8CE3C800380D81 /* OFFPricesStatusView.swift in Sources */,
 				ABBBC01D2B8E11A7002B46F2 /* OFFPricesUsersSortedAndFilteredView.swift in Sources */,

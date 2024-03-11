@@ -20,8 +20,15 @@ struct OFFPricesPricesView: View {
                 Text("Prices List")
                 
             }
+            NavigationLink( destination: OFFPricesPostPriceView(authController: authController) ) {
+                Text("Post Price (authenticate first)")
+            }
+
             NavigationLink( destination: OFFPricesPatchPriceView(authController: authController) ) {
                 Text("Patch Price (authenticate first)")
+            }
+            NavigationLink( destination: OFFPricesDeletePriceView(authController: authController) ) {
+                Text("Delete Price (authenticate first)")
             }
 
         }

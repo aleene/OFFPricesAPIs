@@ -152,6 +152,66 @@ class OFFPricesPricesRequest: OFFPricesRequest {
 
     }
 
+    convenience init(code: String,
+                     name: String?,
+                     categoryTag: String?,
+                     labelsTags: [String],
+                     originsTags: [String],
+                     price: Double,
+                     isDiscounted: Bool,
+                     undiscountedPrice: Double?,
+                     per: OFFPricesRequired.PricePer,
+                     currency: ISO4217,
+                     locationOSMid: UInt,
+                     locationOSMtype: OFFPricesRequired.OSMtype,
+                     date: Date,
+                     proofId: UInt,
+                     token: String?) {
+        self.init(api: .prices)
+        self.headers["accept"] = "application/json"
+        self.method = .post
+        if let validToken = token {
+            self.headers["Authorization"] = "Bearer \(validToken)"
+        }
+        // The body to send depends on whether the discountedPrice is filled
+        if undiscountedPrice != nil {
+            let body = JSONBody([ "product_code": "\(code)",
+                                  "product_name": name,
+                                 // "category_tag": categoryTag ?? "",
+                                 // "labels_tags": labelsTags,
+                                 // "origins_tags": originsTags,
+                                  "price": "\(price)",
+                                  "price_is_discounted": "true",
+                                  "price_without_discount": "\(undiscountedPrice!)",
+                                  "price_per": per.rawValue,
+                                  "currency": currency.rawValue,
+                                  "location_osm_id": "\(locationOSMid)",
+                                  "location_osm_type": locationOSMtype.rawValue,
+                                  "date": date.ISO8601Format(.iso8601.year().month().day()),
+                                  "proof_id": "\(proofId)"
+                                ])
+            self.body = body
+        } else {
+            let body = JSONBody([ "product_code": "\(code)",
+                                  "product_name": name,
+                                 // "category_tag": categoryTag ?? "",
+                                 // "labels_tags": labelsTags,
+                                 // "origins_tags": originsTags,
+                                  "price": "\(price)",
+                                  "price_is_discounted": "false",
+                                  //"price_without_discount": "",
+                                  "price_per": per.rawValue,
+                                  "currency": currency.rawValue,
+                                  "location_osm_id": "\(locationOSMid)",
+                                  "location_osm_type": locationOSMtype.rawValue,
+                                  "date": date.ISO8601Format(.iso8601.year().month().day()),
+                                  "proof_id": "\(proofId)"
+                                ])
+            self.body = body
+        }
+
+    }
+    
     convenience init(priceID: UInt,
                      price: Double,
                      isDiscounted: Bool = false,
@@ -172,11 +232,24 @@ class OFFPricesPricesRequest: OFFPricesRequest {
         }
         let body = JSONBody(["price": "\(price)",
                              "price_is_discounted": isDiscounted ? "true" : "false",
-                             "price_without_discount": undiscountedPrice != nil ? "\(undiscountedPrice!)" : "0.0",
+                             "price_without_discount": undiscountedPrice != nil ? "\(undiscountedPrice!)" : "0.001",
                              "price_per": per.rawValue,
                              "currency": currency.rawValue,
                              "date": date.ISO8601Format(.iso8601.year().month().day())])
         self.body = body
+    }
+    
+    convenience init(priceID: UInt,
+                     token: String?) {
+        self.init(api: .prices)
+        
+        self.path += "/"
+        self.path += "\(priceID)"
+        
+        self.method = .delete
+        if let validToken = token {
+            self.headers["Authorization"] = "Bearer \(validToken)"
+        }
     }
 }
 
@@ -215,7 +288,7 @@ The datastructure retrieved for a 200-reponse  for the Products endpoint.
         var product_code: String?
         var product_name: String?
         var category_tag: String?
-        var label_tag: String?
+        var label_tags: String?
         var origins_tag: String?
         var price: Double?
         var price_is_discounted: Bool?
@@ -234,7 +307,6 @@ The datastructure retrieved for a 200-reponse  for the Products endpoint.
         var product: OFFPricesRequired.Product
         var proof: OFFPricesRequired.Proof
         var location: OFFPricesRequired.Location
-
     }
     
 // The allowed ordering fields. Any other rawValue will give a 422 error
@@ -265,7 +337,7 @@ The datastructure retrieved for a 200-reponse  for the Products endpoint.
         case unordered
     }
     
-    public struct PricePatchResponse: Codable {
+    public struct PricePostPatchResponse: Codable {
         var product_code: String?
         var product_name: String?
         var category_tag: [String]?
@@ -286,6 +358,8 @@ The datastructure retrieved for a 200-reponse  for the Products endpoint.
         var owner: String?
         var created: String?
     }
+    
+
 }
 
 extension URLSession {
@@ -374,7 +448,7 @@ A completion block with a Result enum (success or failure). The associated value
                              currency: ISO4217,
                              date: Date,
                              token: String?,
-                             completion: @escaping (_ result: Result<OFFPricesRequired.PricePatchResponse, OFFPricesError>) -> Void) {
+                             completion: @escaping (_ result: Result<OFFPricesRequired.PricePostPatchResponse, OFFPricesError>) -> Void) {
         let request = OFFPricesPricesRequest(priceID: priceID,
                                              price: price,
                                              isDiscounted: isDiscounted,
@@ -383,7 +457,55 @@ A completion block with a Result enum (success or failure). The associated value
                                              currency: currency,
                                              date: date,
                                              token: token)
-        fetch(request: request, responses: [200:OFFPricesRequired.PricePatchResponse.self]) { (result) in
+        fetch(request: request, responses: [200:OFFPricesRequired.PricePostPatchResponse.self]) { (result) in
+            completion(result)
+            return
+        }
+    }
+
+    func OFFPricesPostPrice(code: String,
+                            name: String?,
+                            categoryTag: String?,
+                            labelsTags: [String],
+                            originsTags: [String],
+                            price: Double,
+                            isDiscounted: Bool,
+                            undiscountedPrice: Double?,
+                            per: OFFPricesRequired.PricePer,
+                            currency: ISO4217,
+                            locationOSMid: UInt,
+                            locationOSMtype: OFFPricesRequired.OSMtype,
+                            date: Date,
+                            proofId: UInt,
+                            token:  String,
+                            completion: @escaping (_ result: Result<OFFPricesRequired.PricePostPatchResponse, OFFPricesError>) -> Void) {
+        let request = OFFPricesPricesRequest(code: code,
+                                             name: name,
+                                             categoryTag: categoryTag,
+                                             labelsTags: labelsTags,
+                                             originsTags: originsTags,
+                                             price: price,
+                                             isDiscounted: isDiscounted,
+                                             undiscountedPrice: undiscountedPrice,
+                                             per: per,
+                                             currency: currency,
+                                             locationOSMid: locationOSMid,
+                                             locationOSMtype: locationOSMtype,
+                                             date: date,
+                                             proofId: proofId,
+                                             token: token)
+        fetch(request: request, responses: [200:OFFPricesRequired.PricePostPatchResponse.self]) { (result) in
+            completion(result)
+            return
+        }
+    }
+
+    func OFFPricesDeletePrice(priceID: UInt,
+                            token:  String,
+                            completion: @escaping (_ result: Result<String, OFFPricesError>) -> Void) {
+        let request = OFFPricesPricesRequest(priceID: priceID,
+                                             token: token)
+        fetch(request: request, responses: [204:String.self]) { (result) in
             completion(result)
             return
         }

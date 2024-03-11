@@ -1,16 +1,16 @@
 //
-//  OFFPricesSession.swift
+//  OFFPricesDeleteSessionView.swift
 //  OFFPricesAPI
 //
-//  Created by Arnaud Leene on 08/03/2024.
+//  Created by Arnaud Leene on 11/03/2024.
 //
 
 import SwiftUI
 
-class OFFPricesSessionViewModel: ObservableObject {
+class OFFPricesDeleteSessionViewModel: ObservableObject {
     
     // variable that needs to be tracked by the view
-    @Published var response: OFFPricesRequired.SessionResponse?
+    @Published var response: OFFPricesRequired.SessionDeleteResponse?
     @Published var errorMessage: String?
 
     private var session = URLSession.shared
@@ -18,7 +18,7 @@ class OFFPricesSessionViewModel: ObservableObject {
     // get the status
     fileprivate func update() {
         // get the remote data
-        session.OFFPricesSession() { (result) in
+        session.OFFPricesDeleteSession() { (result) in
             DispatchQueue.main.async {
                 switch result {
                 case .success(let response):
@@ -28,41 +28,37 @@ class OFFPricesSessionViewModel: ObservableObject {
                 }
             }
         }
-    }           
+    }
 }
 
-struct OFFPricesSessionView: View {
-    
-    @StateObject var model = OFFPricesSessionViewModel()
+struct OFFPricesDeleteSessionView: View {
+    @StateObject var model = OFFPricesDeleteSessionViewModel()
 
     @State private var isFetching = false
     
     var body: some View {
         if isFetching {
             VStack {
-                if let user_id = model.response?.user_id {
-                
-                    Text(user_id)
-                    Text(model.response!.created ?? "no created")
-                    Text(model.response!.last_used ?? "no last_used")
+                if let status = model.response?.status {
+                    Text(status)
                 } else if model.errorMessage != nil {
                     Text(model.errorMessage!)
                 } else {
-                    Text("Requesting session status")
+                    Text("Deleting session")
                 }
             
             }
-            .navigationTitle("Session Status")
+            .navigationTitle("Session Deletion")
         } else {
-            Text("This fetch retrieves the status of the session.")
+            Text("This endpoint deletes the current session.")
             Button( action: {
                 model.update()
                 isFetching = true
             }) {
-                Text("Fetch session status")
+                Text("Delete session")
             }
             .font(.title)
-            .navigationTitle("Session status")
+            .navigationTitle("Session deletion")
             .onAppear {
                 isFetching = false
             }
@@ -72,5 +68,5 @@ struct OFFPricesSessionView: View {
 }
 
 #Preview {
-    OFFPricesSessionView()
+    OFFPricesDeleteSessionView()
 }

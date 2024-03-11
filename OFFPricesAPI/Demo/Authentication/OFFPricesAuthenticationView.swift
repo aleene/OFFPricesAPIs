@@ -17,7 +17,7 @@ class OFFPricesAuthenticationViewModel: ObservableObject {
     
     @ObservedObject var authController = AuthController()
     
-    private var fsnmSession = URLSession.shared
+    private var session = URLSession.shared
     
     var canSignIn: Bool {
         !username.isEmpty && !password.isEmpty
@@ -25,7 +25,7 @@ class OFFPricesAuthenticationViewModel: ObservableObject {
     
     func signIn() {
         guard canSignIn else { return }
-        fsnmSession.OFFPricesAuth(username: self.username, password: self.password) { result in
+        session.OFFPricesAuth(username: self.username, password: self.password) { result in
             DispatchQueue.main.async {
                 switch result {
                 case .success(let auth):

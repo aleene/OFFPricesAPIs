@@ -110,9 +110,9 @@ The datastructure retrieved for a 200-reponse  for the Locations endpoint.
     }
 
     public enum OSMtype: String {
-        case node = "node"
-        case way = "way"
-        case relation = "relation"
+        case node = "NODE"
+        case way = "WAY"
+        case relation = "RELATION"
     }
 }
 
